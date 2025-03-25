@@ -856,6 +856,7 @@ order by
 -----------------------------------------------------
 
 select 
+	concat(cast(tps.Qtr as varchar), 'Q', cast(tps.Fiscal_Year as varchar)) as [Period],
 	tps.Fiscal_Year,
 	tps.Qtr,
 	ISNULL(wps.Tax_Collected,0) AS Water_Charges,
@@ -907,8 +908,7 @@ order by
 	tps.Qtr
 
 select 
-	Fiscal_Year,
-	Qtr,
+	[Period],
 	(FORMAT(ISNULL(Water_Charges + Water_Cap_Surcharges + Sewer_Charges + Sewer_Cap_Surcharges + Fire_Charges + Penalty_Charges + Meter_Reconnect_Fees,0), 'C')) as Gross_Charges_1,
 	(FORMAT(ISNULL(Sewer_Charges + Sewer_Cap_Surcharges + Fire_Charges + Penalty_Charges,0), 'C')) as Deductions_2,
 	'N/A' as Non_Standard_Adjustments_3,
